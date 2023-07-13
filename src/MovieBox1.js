@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const imageURL = "https://image.tmdb.org/t/p/w500/"
 
 
-function MovieBox1({ original_title, poster_path, vote_average, release_date }) {
+function MovieBox1({ original_title, poster_path}) {
     return (
         <div className="card align-middle" style={{ width: "18rem" }}>
             <img className="card-img-top" src={imageURL + poster_path} alt="Card image cap" />

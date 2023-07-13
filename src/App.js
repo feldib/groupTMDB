@@ -1,11 +1,16 @@
 import Homepage from './Homepage';
+import Header from "./Header";
+import Footer from "./Footer";
+import MoviePage from './MoviePage';
 import './App.css';
 
 function App() {
   return (
-   <div>
-   <Homepage />
-   </div>
+    <div class="main">
+      <Header />
+      <MoviePage />
+      <Footer />
+    </div>
   );
 }
 
