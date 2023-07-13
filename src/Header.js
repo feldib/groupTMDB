@@ -1,6 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightToBracket } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
+
 import logo from "./logo.svg"
 
 function Header() {
@@ -23,13 +25,14 @@ function Header() {
                             <Link className="nav-link" to="Search">Search a movie</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="Register">Register</Link>
+                            <Link className="nav-link" to="Register1">Register</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="Login">Login</Link>
+                            <Link className="nav-link" to="LoginPage">Login</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="Profile">Profile</Link>
+                            <Link className="nav-link" to="ProfilePage">Profile</Link>
+
                         </li>
                     </ul>
                     <div className="row justify-content-md-center justify-content-start mt-3 mb-2 ml-1 mr-2">
