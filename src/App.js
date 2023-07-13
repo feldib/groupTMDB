@@ -54,6 +54,7 @@ function App() {
             <RegisterPage3 />
           } />
         </Routes>
+
       <Footer />
     </div>
               
