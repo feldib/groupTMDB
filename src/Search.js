@@ -39,7 +39,7 @@ function Search() {
                 </Col>
             </Row>
                 
-            <Row className='mt-3'>
+            <Row className='text-center mt-3'>
                 <Col>
                     <p>❌Query</p>
                     <p>❌Query</p>
