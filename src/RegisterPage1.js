@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, InputGroup, Container, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons"
+import { useHistory } from 'react-router-dom'
 
 const RegisterPage1 = () => {
     const history = useHistory()
@@ -9,6 +10,7 @@ const RegisterPage1 = () => {
     const nextPage = () => {
         history.push('/register/2')
     }
+
     return (
         <Container className="mt-5">
             <Row className="justify-content-center">
@@ -45,7 +47,7 @@ const RegisterPage1 = () => {
                             </InputGroup>
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" block>Next Page</Button>
+                        <Button variant="primary" type="button" block onClick={nextPage}>Next Page</Button>
                     </Form>
                 </Col>
             </Row>
