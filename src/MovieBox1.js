@@ -1,22 +1,17 @@
 import React from "react";
-import poster from "./poster.jpg"
-
+import "bootstrap/dist/css/bootstrap.min.css";
 const imageURL = "https://image.tmdb.org/t/p/w500/"
 
-// function MovieBox({ original_title, poster_path, vote_average, release_date, overview}) {
-    function MovieBox() {
-    // const [show, setShow] = useState(false);
 
-    // const handleClose = () => setShow(!show);
-
+function MovieBox1({ original_title, poster_path, vote_average, release_date }) {
     return (
-        <div className="card" style={{ width: "16rem" }}>
-            <img className="card-img-top" src={poster} alt="Card image cap" />
+        <div className="card align-middle" style={{ width: "18rem" }}>
+            <img className="card-img-top" src={imageURL + poster_path} alt="Card image cap" />
             <div className="card-body">
-                <h5 className="card-text">Some randome title</h5>
+                <h5 className="card-text">{original_title}</h5>
             </div>
         </div>
     )
 }
 
-export default MovieBox;
+export default MovieBox1;
