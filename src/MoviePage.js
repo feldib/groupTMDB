@@ -3,21 +3,33 @@ import poster from "./poster.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeadphones } from '@fortawesome/free-solid-svg-icons'
 import { useParams } from "react-router-dom";
-import { fetching } from "./Fetching2";
+import { fetching2 } from "./Fetching2";
+import { fetching } from "./Fetching";
+import GalleryImage from "./GalleryImage";
 
 function MoviePage() {
-    
-    const [movie, setMovie] = useState('')
+
+    const [movie, setMovie] = useState('');
+    const [images, setImages] = useState([]);
 
     const param = useParams()
     const movieID = param.id
     const movieURL = `https://api.themoviedb.org/3/movie/${movieID}?api_key=8d97210e6edd66eb9e967278325836d0`;
+    const imagesURL = `https://api.themoviedb.org/3/movie/${movieID}/images?api_key=8d97210e6edd66eb9e967278325836d0`;
 
     useEffect(() => {
-        fetching(movieURL, setMovie)
+        fetching2(movieURL, setMovie)
+    }, []);
+
+    useEffect(() => {
+        fetch(`https://api.themoviedb.org/3/movie/${movieID}/images?api_key=8d97210e6edd66eb9e967278325836d0`)
+            .then(response => response.json())
+            .then(response => setImages(response.backdrops))
+            .catch(err => console.error(err));
     }, []);
 
     const imageURL = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+    const imageURL2 = `https://image.tmdb.org/t/p/w500`
 
     return (
         <div className="container">
@@ -33,10 +45,10 @@ function MoviePage() {
                                     <h1 class="card-title">{movie.title}</h1>
                                 </div>
                                 <div className="col-1">
-                                <FontAwesomeIcon icon={faHeadphones} size="2xl"/>                                </div>
+                                    <FontAwesomeIcon icon={faHeadphones} size="2xl" />                                </div>
                             </div>
                             <h3 class="card-title">Overview</h3>
-                        <p class="card-text">{movie.overview}</p>
+                            <p class="card-text">{movie.overview}</p>
                             <h6 class="card-text">{movie.release_date}</h6>
                             <h6 class="card-text">{movie.vote_average}</h6>
                         </div>
@@ -47,30 +59,7 @@ function MoviePage() {
                 <div>
                     <div className='d-flex p-3 text-center' style={{ overflowX: "auto" }}>
                         <div className='d-flex flex-row' >
-                            <div className="card align-middle" style={{ width: "18rem" }}>
-                                <img className="card-img-top" src={poster} alt="Card image cap" />
-                            </div>
-                            <div className="card align-middle" style={{ width: "18rem" }}>
-                                <img className="card-img-top" src={poster} alt="Card image cap" />
-                            </div>
-                            <div className="card align-middle" style={{ width: "18rem" }}>
-                                <img className="card-img-top" src={poster} alt="Card image cap" />
-                            </div>
-                            <div className="card align-middle" style={{ width: "18rem" }}>
-                                <img className="card-img-top" src={poster} alt="Card image cap" />
-                            </div>
-                            <div className="card align-middle" style={{ width: "18rem" }}>
-                                <img className="card-img-top" src={poster} alt="Card image cap" />
-                            </div>
-                            <div className="card align-middle" style={{ width: "18rem" }}>
-                                <img className="card-img-top" src={poster} alt="Card image cap" />
-                            </div>
-                            <div className="card align-middle" style={{ width: "18rem" }}>
-                                <img className="card-img-top" src={poster} alt="Card image cap" />
-                            </div>
-                            <div className="card align-middle" style={{ width: "18rem" }}>
-                                <img className="card-img-top" src={poster} alt="Card image cap" />
-                            </div>
+                            {images.map((image) => <GalleryImage poster={imageURL2 + image.file_path} />)}
                         </div>
                     </div>
                 </div>
