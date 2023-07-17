@@ -1,8 +1,7 @@
 import React from 'react'
-import {Row, Form, InputGroup, Button} from 'react-bootstrap'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear, faUser, faKey, faLanguage, faQuestion, faHeadphonesSimple } from "@fortawesome/free-solid-svg-icons"
-import DetailsFormComponent from "./DetailsFormComponent"
+import {Row, Form, InputGroup} from 'react-bootstrap'
+import { faUser, faKey, faLanguage, faQuestion, faHeadphonesSimple } from "@fortawesome/free-solid-svg-icons"
+import DetailsFormComponent from './DetailsFormComponent'
 
 function Details() {
     return (
