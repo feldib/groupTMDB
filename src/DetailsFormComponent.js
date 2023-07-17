@@ -1,9 +1,11 @@
 import React from 'react'
 import {Form, InputGroup, Button} from 'react-bootstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGear} from "@fortawesome/free-solid-svg-icons"
+import { faGear, faCheck} from "@fortawesome/free-solid-svg-icons"
 
 function DetailsFormComponent(props) {
+    const [isDisabled, setIsDisabled] = React.useState(true)
+    const input = React.useRef()
     return (
         <>
             <Form.Label>{props.label}</Form.Label>
@@ -15,10 +17,17 @@ function DetailsFormComponent(props) {
                 <Form.Control
                     placeholder={props.placeholder}
                     type={props.type }
-                    disabled
+                    ref={input}
+                    disabled={isDisabled}
                 />
-                <Button>
-                    <FontAwesomeIcon icon={faGear} />
+                <Button 
+                    onClick={()=>{
+                        setIsDisabled(!isDisabled)
+                    }}
+                >
+                    <FontAwesomeIcon 
+                        icon={isDisabled ? faGear : faCheck} 
+                    />
                 </Button>    
             </InputGroup>
         </>
