@@ -9,7 +9,7 @@ import Details from './Details';
 import ViewHistory from './ViewHistory';
 import LoginPage from './LoginPage'
 import RegisterPage1 from './RegisterPage1';
-import RegisterPage2 from './RegisterPage3';
+import RegisterPage2 from './RegisterPage2';
 import RegisterPage3 from './RegisterPage3';
 import MoviePage from './MoviePage';
 
