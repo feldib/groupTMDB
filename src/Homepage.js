@@ -14,16 +14,15 @@ function Homepage() {
     useEffect(() => {
         fetching(moviesUrl1, setMovies1)
         fetching(moviesUrl2, setMovies2)
-    }, [])
+    }, []);
 
     return (
         <div>
             <img src={banner} class="img-fluid w-100" alt="Responsive image" />
             <h3>Upcoming movies</h3>
-            <MovieGalery1 movies={movies1}/>
+            <MovieGalery1 movies={movies1} />
             <h3>Top rated movies</h3>
-            <MovieGalery1 movies={movies2}/>
-
+            <MovieGalery1 movies={movies2} />
         </div>
     )
 }

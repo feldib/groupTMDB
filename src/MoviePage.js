@@ -1,30 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import poster from "./poster.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeadphones } from '@fortawesome/free-solid-svg-icons'
+import { useParams } from "react-router-dom";
+import { fetching } from "./Fetching2";
 
-const imageURL = "https://image.tmdb.org/t/p/w500/"
+function MoviePage() {
+    
+    const [movie, setMovie] = useState('')
 
-function MoviePage({ original_title, poster_path, vote_average, release_date, overview }) {
+    const param = useParams()
+    const movieID = param.id
+    const movieURL = `https://api.themoviedb.org/3/movie/${movieID}?api_key=8d97210e6edd66eb9e967278325836d0`;
+
+    useEffect(() => {
+        fetching(movieURL, setMovie)
+    }, []);
+
+    const imageURL = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+
     return (
         <div className="container">
             <div class="card mb-3 ml-5 mr-5 border-0">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src={poster} class="card-img" alt="..." />
+                        <img src={imageURL} class="card-img" alt="..." />
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <div className="row">
                                 <div className="col-11">
-                                    <h1 class="card-title">Movie title</h1>
+                                    <h1 class="card-title">{movie.title}</h1>
                                 </div>
                                 <div className="col-1">
                                 <FontAwesomeIcon icon={faHeadphones} size="2xl"/>                                </div>
                             </div>
                             <h3 class="card-title">Overview</h3>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <h6 class="card-text">Release date</h6>
+                        <p class="card-text">{movie.overview}</p>
+                            <h6 class="card-text">{movie.release_date}</h6>
+                            <h6 class="card-text">{movie.vote_average}</h6>
                         </div>
                     </div>
                 </div>
