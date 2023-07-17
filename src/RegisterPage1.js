@@ -52,4 +52,4 @@ const RegisterPage1 = () => {
     )
 }
 
-export default RegisterPage1
+// export default RegisterPage1
