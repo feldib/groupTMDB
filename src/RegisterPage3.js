@@ -1,42 +1,62 @@
 import React from 'react'
 import { Button, Form, InputGroup, Container, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQuestion, faHeadphonesAlt } from "@fortawesome/free-solid-svg-icons"
+import { faFilm, faHeadphonesAlt } from "@fortawesome/free-solid-svg-icons"
 
 const RegisterPage3 = () => {
     return (
-        <Container className="mt-5">
-            <Row className="justify-content-center">
-                <Col xs={12} sm={8} md={6} lg={4}>
-                    <h1 className="mb-4">Come Register!</h1>
-                    <Form>
-                        <Form.Group controlId="formGalleries">
-                            <Form.Label>Show Galleries (Optional):</Form.Label>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text><FontAwesomeIcon icon={faQuestion} /></InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Check type="checkbox" label="Most Popular" />
-                                <Form.Check type="checkbox" label="Top Rated" />
-                                <Form.Check type="checkbox" label="Upcoming" />
-                            </InputGroup>
-                        </Form.Group>
+        <Row className="register-page-3">
+          <h1 className='text-center'>Come Register!</h1>
+          <Col className='mx-5'>
+            <Form>
+              <Form.Group className="mb-3" controlId="formGallery">
+                <Form.Label>Show Galleries:</Form.Label>
+                <InputGroup>
+                  <InputGroup.Text>
+                    <FontAwesomeIcon icon={faFilm} />
+                  </InputGroup.Text>
+                  <InputGroup>
+                    <Col>
+                      <Form.Check 
+                          type="checkbox"
+                          id="gallery1"
+                          label="Most Popular"
+                      />
+                      <Form.Check 
+                          type="checkbox"
+                          id="gallery2"
+                          label="Top Rated"
+                      />
+                      <Form.Check 
+                          type="checkbox"
+                          id="gallery3"
+                          label="Upcoming"
+                      />
+                    </Col>
+                  </InputGroup>
+                </InputGroup>
+              </Form.Group>
 
-                        <Form.Group controlId="formVoiceTextLanguage">
-                            <Form.Label>Voice-to-text Language (Optional):</Form.Label>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text><FontAwesomeIcon icon={faHeadphonesAlt} /></InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control type="text" placeholder="Enter Language" />
-                            </InputGroup>
-                        </Form.Group>
+              <Form.Group className="mb-3" controlId="formTTS">
+                <Form.Label>Text-to-Voice Language:</Form.Label>
+                <InputGroup>
+                  <InputGroup.Text>
+                    <FontAwesomeIcon icon={faHeadphonesAlt} />
+                  </InputGroup.Text>
+                  <Form.Control type="text" placeholder="Enter Language" />
+                </InputGroup>
+              </Form.Group>
 
-                        <Button variant="primary" type="submit" block>Finish Registration</Button>
-                    </Form>
+              <Row className='justify-content-center mt-3'>
+                <Col lg="2">
+                  <Button className='text-center mx-auto' variant="primary" type="submit">Register!</Button>
                 </Col>
-            </Row>
-        </Container>
+              </Row>
+              
+            </Form>
+          </Col>
+          
+        </Row>
     )
 }
 
