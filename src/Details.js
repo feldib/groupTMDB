@@ -2,74 +2,39 @@ import React from 'react'
 import {Row, Form, InputGroup, Button} from 'react-bootstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faUser, faKey, faLanguage, faQuestion, faHeadphonesSimple } from "@fortawesome/free-solid-svg-icons"
+import DetailsFormComponent from "./DetailsFormComponent"
 
 function Details() {
     return (
         <Row>
             <Form>
-                <Form.Label>Username</Form.Label>
-                <InputGroup>
-                    <InputGroup.Text>
-                        <FontAwesomeIcon icon={faUser} />
-                    </InputGroup.Text>
-
-                    <Form.Control
-                        placeholder="[Username]" 
-                        type="text" 
-                        disabled
-                    />
-                    <Button>
-                        <FontAwesomeIcon icon={faGear} />
-                    </Button>    
-                </InputGroup>
+                <DetailsFormComponent 
+                    label = "Username"
+                    icon = {faUser}
+                    placeholder = "[Username]"
+                    type = "text"
+                />
                 
-                <Form.Label>Password</Form.Label>
-                <InputGroup>
-                    <InputGroup.Text>
-                        <FontAwesomeIcon icon={faKey} />
-                    </InputGroup.Text>
+                <DetailsFormComponent 
+                    label = "Password"
+                    icon = {faKey}
+                    placeholder = "[****]" 
+                    type = "password"
+                />
 
-                    <Form.Control
-                        placeholder="[****]" 
-                        type="password"
-                        disabled 
-                    />   
-                    <Button>
-                        <FontAwesomeIcon icon={faGear} />
-                    </Button>  
-                </InputGroup>
+                <DetailsFormComponent 
+                    label = "Favourite Language"
+                    icon = {faLanguage}
+                    placeholder = "[Favourite language]"
+                    type = "text"
+                />
 
-                <Form.Label>Favourite Language</Form.Label>
-                <InputGroup>
-                    <InputGroup.Text>
-                        <FontAwesomeIcon icon={faLanguage} />
-                    </InputGroup.Text>
-
-                    <Form.Control
-                        placeholder="[Favourite language]" 
-                        type="text"
-                        disabled
-                    />    
-                    <Button>
-                        <FontAwesomeIcon icon={faGear} />
-                    </Button>  
-                </InputGroup>
-
-                <Form.Label>Favourite Genre</Form.Label>
-                <InputGroup>
-                    <InputGroup.Text>
-                        <FontAwesomeIcon icon={faQuestion} />
-                    </InputGroup.Text>
-
-                    <Form.Control
-                        placeholder="[Favourite genre]" 
-                        type="text"
-                        disabled
-                    /> 
-                    <Button>
-                        <FontAwesomeIcon icon={faGear} />
-                    </Button>     
-                </InputGroup>
+                <DetailsFormComponent 
+                    label = "Favourite Genre"
+                    icon = {faQuestion}
+                    placeholder = "[Favourite genre]"
+                    type = "text"
+                />
 
                 <Form.Label>Choose Galleries</Form.Label>
                 <InputGroup>
@@ -96,21 +61,12 @@ function Details() {
                     />            
                 </InputGroup>
 
-                <Form.Label>Voice-To-Text Language</Form.Label>
-                <InputGroup>
-                    <InputGroup.Text>
-                        <FontAwesomeIcon icon={faHeadphonesSimple} />
-                    </InputGroup.Text>
-
-                    <Form.Control
-                        placeholder="[Language]" 
-                        type="text"
-                        disabled
-                    />
-                    <Button>
-                        <FontAwesomeIcon icon={faGear} />
-                    </Button>      
-                </InputGroup>
+                <DetailsFormComponent 
+                    label = "Voice-To-Text Language"
+                    icon = {faHeadphonesSimple}
+                    placeholder = "[Language]" 
+                    type = "text"
+                />
             </Form>
         </Row>
     )
