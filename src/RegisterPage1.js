@@ -1,58 +1,55 @@
-// import React from 'react'
-// import { Button, Form, InputGroup, Container, Row, Col } from 'react-bootstrap'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faUser, faKey } from "@fortawesome/free-solid-svg-icons"
-// import { useHistory } from 'react-router-dom'
+import React from 'react'
+import { Button, Form, InputGroup, Row, Col } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faKey } from "@fortawesome/free-solid-svg-icons"
 
-// const RegisterPage1 = () => {
-//     const history = useHistory()
+const RegisterPage1 = () => {
+    return (
+        <Row className="register-page-1">
+          <h1 className='text-center'>Come Register!</h1>
+          <Col className='mx-5'>
+            <Form>
+              <Form.Group className="mb-3" controlId="formUsername">
+                <Form.Label>Username:</Form.Label>
+                <InputGroup>
+                  <InputGroup.Text>
+                    <FontAwesomeIcon icon={faUser} />
+                  </InputGroup.Text>
+                  <Form.Control type="text" placeholder="Enter username" />
+                </InputGroup>
+              </Form.Group>
 
-//     const nextPage = () => {
-//         history.push('/register/2')
-//     }
+              <Form.Group className="mb-3" controlId="formPassword">
+                <Form.Label>Password:</Form.Label>
+                <InputGroup>
+                  <InputGroup.Text>
+                    <FontAwesomeIcon icon={faKey} />
+                  </InputGroup.Text>
+                  <Form.Control type="password" placeholder="Enter password" />
+                </InputGroup>
+              </Form.Group>
 
-//     return (
-//         <Container className="mt-5">
-//             <Row className="justify-content-center">
-//                 <Col xs={12} sm={8} md={6} lg={4}>
-//                     <h1 className="mb-4">Come Register!</h1>
-//                     <Form>
-//                         <Form.Group controlId="formUsername">
-//                             <Form.Label>Username:</Form.Label>
-//                             <InputGroup>
-//                                 <InputGroup.Prepend>
-//                                     <InputGroup.Text><FontAwesomeIcon icon={faUser} /></InputGroup.Text>
-//                                 </InputGroup.Prepend>
-//                                 <Form.Control type="text" placeholder="Enter username" />
-//                             </InputGroup>
-//                         </Form.Group>
+              <Form.Group className="mb-3" controlId="formConfirmPassword">
+                <Form.Label>Confirm Password:</Form.Label>
+                <InputGroup>
+                  <InputGroup.Text>
+                    <FontAwesomeIcon icon={faKey} />
+                  </InputGroup.Text>
+                  <Form.Control type="password" placeholder="Enter password" />
+                </InputGroup>
+              </Form.Group>
 
-//                         <Form.Group controlId="formPassword">
-//                             <Form.Label>Password:</Form.Label>
-//                             <InputGroup>
-//                                 <InputGroup.Prepend>
-//                                     <InputGroup.Text><FontAwesomeIcon icon={faKey} /></InputGroup.Text>
-//                                 </InputGroup.Prepend>
-//                                 <Form.Control type="password" placeholder="Enter password" />
-//                             </InputGroup>
-//                         </Form.Group>
-
-//                         <Form.Group controlId="formConfirmPassword">
-//                             <Form.Label>Confirm Password:</Form.Label>
-//                             <InputGroup>
-//                                 <InputGroup.Prepend>
-//                                     <InputGroup.Text><FontAwesomeIcon icon={faKey} /></InputGroup.Text>
-//                                 </InputGroup.Prepend>
-//                                 <Form.Control type="password" placeholder="Confirm password" />
-//                             </InputGroup>
-//                         </Form.Group>
-
-//                         <Button variant="primary" type="button" block onClick={nextPage}>Next Page</Button>
-//                     </Form>
-//                 </Col>
-//             </Row>
-//         </Container>
-//     )
-// }
+              <Row className='justify-content-center mt-3'>
+                <Col lg="2">
+                  <Button className='text-center mx-auto' variant="primary" type="submit">Next Page</Button>
+                </Col>
+              </Row>
+              
+            </Form>
+          </Col>
+          
+        </Row>
+    )
+}
 
 // export default RegisterPage1
