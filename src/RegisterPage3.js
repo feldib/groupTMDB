@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, InputGroup, Container, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm, faHeadphonesAlt } from "@fortawesome/free-solid-svg-icons"
+import { Link } from 'react-router-dom'
 
 const RegisterPage3 = () => {
     return (
@@ -49,7 +50,9 @@ const RegisterPage3 = () => {
 
               <Row className='justify-content-center mt-3'>
                 <Col lg="2">
-                  <Button className='text-center mx-auto' variant="primary" type="submit">Register!</Button>
+                    <Link to="/ProfilePage">
+                        <Button className='text-center mx-auto' variant="primary" type="submit">Register!</Button>
+                    </Link>
                 </Col>
               </Row>
               
