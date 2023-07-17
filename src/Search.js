@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import MovieGalleryBig from './MovieGalleryBig';
 import { fetching } from "./Fetching";
+import Loader from './Loader';
 
 
 
@@ -17,6 +18,7 @@ function Search() {
     }, [])
 
     return (
+        movies1.length === 0 ? <Loader/> :
         <Row className="login-page">
             <Row>
                 <Col>
