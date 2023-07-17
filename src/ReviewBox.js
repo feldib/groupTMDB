@@ -6,7 +6,7 @@ function ReviewBox(props) {
             <h5 class="card-header">Author: {props.author}</h5>
             <div class="card-body">
                 <p class="card-text">{props.reviewText}</p>
-                <h5> Rating {`${props.rating}/10`}</h5>
+                <h5> Rating {props.rating === null? 'is not available' :`${props.rating}/10`}</h5>
             </div>
         </div>
     )

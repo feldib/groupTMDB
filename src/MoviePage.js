@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { fetching2 } from "./Fetching2";
 import GalleryImage from "./GalleryImage";
 import ReviewBox from "./ReviewBox";
+import Loader from "./Loader";
 
 function MoviePage() {
 
@@ -38,6 +39,7 @@ function MoviePage() {
     const imageURL2 = `https://image.tmdb.org/t/p/w500`
 
     return (
+        movie.length === 0? <Loader/> :
         <div className="container mt-3">
             <div class="card mb-3 ml-5 mr-5 border-0">
                 <div class="row no-gutters">
@@ -73,7 +75,7 @@ function MoviePage() {
                 <div className="mt-3"><h3>Reviews</h3></div>
 
                 <div>
-                    {reviews.map((review) => 
+                    { reviews.length === 0 ? 'No one yet written a review, wanna be first?' : reviews.map((review) => 
                             <ReviewBox
                                 author={review.author}
                                 reviewText={review.content}
