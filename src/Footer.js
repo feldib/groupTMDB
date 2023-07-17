@@ -4,7 +4,12 @@ import logo from "./logo.svg"
 
 function Footer() {
     return(
-        <footer class="footer">
+        <footer 
+            className="footer fixed-bottom"
+            style={{
+                width: "100%",
+            }}
+        >
             <div className="p-3 bg-light text-dark">
                 <div className="row align-items-center">
                     <div className="col-md text-md-left text-center">
