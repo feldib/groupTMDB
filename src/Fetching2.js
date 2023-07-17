@@ -1,4 +1,4 @@
-export async function fetching(url, stateFunction) {
+export async function fetching2(url, stateFunction) {
     try {
         let response = await fetch(url)
         let decode = await response.json()
