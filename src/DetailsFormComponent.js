@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Form, InputGroup, Button} from 'react-bootstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faCheck} from "@fortawesome/free-solid-svg-icons"
 
 function DetailsFormComponent(props) {
-    const [isDisabled, setIsDisabled] = React.useState(true)
+    const [isDisabled, setIsDisabled] = useState(true)
     const input = React.useRef()
     return (
         <>
@@ -23,6 +23,11 @@ function DetailsFormComponent(props) {
                 <Button 
                     onClick={()=>{
                         setIsDisabled(!isDisabled)
+                        if(!isDisabled) {
+                            let inputValue = input.current.value;
+                            props.stateFunction(inputValue);
+                            props.saveFunction(props.stateKey, inputValue); // Save the changes to local storage
+                        }
                     }}
                 >
                     <FontAwesomeIcon 
