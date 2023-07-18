@@ -9,9 +9,14 @@ const RegisterPage1 = () => {
     const [password, setPassword] = useState("");
 
     useEffect(() => {
-        localStorage.setItem('username', username);
-        localStorage.setItem('password', password);
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUserIndex = localStorage.getItem('currentUserIndex') || 0;
+        let newUser = {...users[currentUserIndex], username, password};
+        users[currentUserIndex] = newUser;
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('currentUserIndex', currentUserIndex);
     }, [username, password]);
+
 
     return (
         <Row className="register-page-1">

@@ -9,9 +9,14 @@ const RegisterPage3 = () => {
     const [languageForHearing, setLanguageForHearing] = useState("");
 
     useEffect(() => {
-        localStorage.setItem('galleryToShow', JSON.stringify(galleryToShow));
-        localStorage.setItem('languageForHearing', languageForHearing);
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUserIndex = localStorage.getItem('currentUserIndex') || 0;
+        let newUser = {...users[currentUserIndex], galleryToShow, languageForHearing};
+        users[currentUserIndex] = newUser;
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('currentUserIndex', currentUserIndex);
     }, [galleryToShow, languageForHearing]);
+
 
     const handleCheckboxChange = (e) => {
         if (e.target.checked) {
