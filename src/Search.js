@@ -12,14 +12,13 @@ function Search() {
     const upcomingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=8d97210e6edd66eb9e967278325836d0"
 
     const [movies, setMovies] = React.useState([])
-    const [searchOrFilterActive, setSearchOrFilterActive] = React.useState(false)
     const [currentQueryOrFilter, setCurrentQueryOrFilter] = React.useState()
 
     React.useEffect(() => {
-        if(!searchOrFilterActive){
+        if(!currentQueryOrFilter){
             fetching(upcomingUrl, setMovies)
         }
-    }, [searchOrFilterActive])
+    }, [currentQueryOrFilter])
 
     const searchElement = React.useRef()
 
@@ -45,7 +44,6 @@ function Search() {
     ]
 
     const processQueryOrFilter = async(what, value)=>{
-        setSearchOrFilterActive(true)
         setCurrentQueryOrFilter(value)
         if(what === "query"){
             await SearchFetching(setMovies, value)
@@ -93,7 +91,6 @@ function Search() {
                             <span 
                                 style={{cursor: "pointer"}}
                                 onClick={()=>{
-                                    setSearchOrFilterActive(false)
                                     setCurrentQueryOrFilter()
                                 }}
                             >❌</span>
