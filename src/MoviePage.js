@@ -7,7 +7,7 @@ import GalleryImage from "./GalleryImage";
 import ReviewBox from "./ReviewBox";
 import Loader from "./Loader";
 
-function MoviePage() {
+function MoviePage(props) {
 
     const [movie, setMovie] = useState('');
     const [images, setImages] = useState([]);
@@ -19,7 +19,10 @@ function MoviePage() {
 
     useEffect(() => {
         fetching2(movieURL, setMovie)
+        const currentUrl = window.location.pathname
+        props.handleClick(currentUrl)
     }, []);
+
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/movie/${movieID}/images?api_key=8d97210e6edd66eb9e967278325836d0`)
