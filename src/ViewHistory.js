@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import {Row, Dropdown, Col, Button} from 'react-bootstrap'
 import HistoryBox from './HistoryBox'
 
 
 function ViewHistory(props) {
+    const [movies, setMovies] = useState([]);
+    const urlArray = props.urlArray;
+    const arrOfApi = []
+
+
+    useEffect(() => {
+        arrOfApi.map((api) => {
+            fetch(api)
+            .then(response => response.json())
+            .then(response => setMovies([...movies, response]))
+            .catch(err => console.error(err));
+        }) 
+    }, []);
     return (
         <Row className='mt-5'>
            <Row>
@@ -39,7 +52,10 @@ function ViewHistory(props) {
                 </Col>
            </Row>
 
-
+           {urlArray.map((url) => arrOfApi.push(`https://api.themoviedb.org/3/movie${url}?api_key=8d97210e6edd66eb9e967278325836d0`))}
+                    {console.log(urlArray)}
+                    {console.log(arrOfApi)}
+                    {console.log(movies)}
 
            <Row className='mt-5'>
                 <Col>
@@ -49,7 +65,9 @@ function ViewHistory(props) {
                 </Col>
 
            </Row>
-                <HistoryBox urlArray={props.urlArray}/>
+
+           {movies.length === 0 ? "no movies viewed" : movies.map((movie) => <HistoryBox theMovie={movie}/>) }
+                
         </Row>
     )
 }
