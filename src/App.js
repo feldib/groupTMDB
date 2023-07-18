@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { useState } from 'react';
 import './App.css';
 import Header from './Header'
 import Footer from './Footer'
@@ -14,6 +15,14 @@ import RegisterPage3 from './RegisterPage3';
 import MoviePage from './MoviePage';
 
 function App() {
+
+  const [visitHistory, setVisitHistory] = useState([])
+
+  function handleHistory(url) {
+    setVisitHistory([...visitHistory, url])
+    console.log(visitHistory)
+  }
+
   return (
     <div>
       <Header />
@@ -23,10 +32,10 @@ function App() {
         <Routes >
           <Route path="/" element={
             <Homepage />
-          }/>
+          } />
 
           <Route path="/:id" element={
-          <MoviePage/>
+            <MoviePage handleClick={handleHistory} />
           } />
 
 
@@ -42,7 +51,7 @@ function App() {
             }
             />
             <Route path="ViewHistory" element={
-              <ViewHistory />
+              <ViewHistory urlArray={visitHistory}/>
             }
             />
           </Route>

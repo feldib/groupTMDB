@@ -58,7 +58,7 @@ function Search() {
         <Row className="login-page">
             <Row>
                 <Col>
-                    <h1 className='text-center'>Login!</h1>
+                    <h1 className='text-center'>Search!</h1>
                 </Col>
             </Row>
 
