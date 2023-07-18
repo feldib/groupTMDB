@@ -7,12 +7,15 @@ import { fetching } from "./Fetching";
 import Loader from './Loader';
 import SearchFetching from './SearchFetching';
 import FilterFetching from './FilterFetching';
+import sortingOptions from './sortingOptions'
+import genres from './genres'
 
 function Search() {
     const upcomingUrl = "https://api.themoviedb.org/3/movie/upcoming?api_key=8d97210e6edd66eb9e967278325836d0"
 
     const [movies, setMovies] = React.useState([])
     const [currentQueryOrFilter, setCurrentQueryOrFilter] = React.useState()
+    const [currentSorting, setCurrentSorting] = React.useState("")
 
     React.useEffect(() => {
         if(!currentQueryOrFilter){
@@ -21,27 +24,6 @@ function Search() {
     }, [currentQueryOrFilter])
 
     const searchElement = React.useRef()
-
-    const genres = [
-        "Adventure",
-        "Animation",
-        "Comedy",
-        "Crime",
-        "Documentary",
-        "Drama",
-        "Family",
-        "Fantasy",
-        "History",
-        "Horror",
-        "Music",
-        "Mystery",
-        "Romance",
-        "Science Fiction",
-        "Thriller",
-        "TV Movie",
-        "War",
-        "Western"
-    ]
 
     const processQueryOrFilter = async(what, value)=>{
         setCurrentQueryOrFilter(value)
@@ -91,13 +73,25 @@ function Search() {
                             <span 
                                 style={{cursor: "pointer"}}
                                 onClick={()=>{
-                                    setCurrentQueryOrFilter()
+                                    setCurrentQueryOrFilter("")
                                 }}
                             >❌</span>
                             {currentQueryOrFilter}
                         </p>
                     }
-
+                </Col>
+                <Col>
+                    {currentSorting &&
+                        <p>
+                            <span 
+                                style={{cursor: "pointer"}}
+                                onClick={()=>{
+                                    setCurrentSorting("")
+                                }}
+                            >❌</span>
+                            {currentSorting}
+                        </p>
+                    }
                 </Col>
                     
                 <Col>
@@ -108,7 +102,6 @@ function Search() {
                     >
                         <Dropdown.Toggle>Filter</Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="" disabled>Select Genre...</Dropdown.Item>
                             {genres.map((val)=>{
                                 return (
                                     <Dropdown.Item 
@@ -122,12 +115,21 @@ function Search() {
                 </Col>
                     
                 <Col>
-                    <Dropdown>
+                    <Dropdown
+                        onSelect={(eventKey)=>{
+                            setCurrentSorting(eventKey)
+                        }}
+                    >
                         <Dropdown.Toggle>Sort:</Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="">Rating</Dropdown.Item>
-                            <Dropdown.Item href="">Release date</Dropdown.Item>
-                            <Dropdown.Item href="">Movie name</Dropdown.Item>
+                            {sortingOptions.map((val)=>{
+                                return (
+                                    <Dropdown.Item 
+                                        href=""
+                                        eventKey={val}
+                                    >{val}</Dropdown.Item>
+                                )
+                            })}  
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
@@ -137,7 +139,7 @@ function Search() {
                 <Col>
                     {movies.length === 0 
                         ? <Loader/> 
-                        : <MovieGalleryBig movies={movies} />
+                        : <MovieGalleryBig movies={movies} sorting={currentSorting}/>
                     }
                 </Col>
             </Row>
