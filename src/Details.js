@@ -4,20 +4,25 @@ import { faUser, faKey, faLanguage, faQuestion, faHeadphonesSimple } from "@fort
 import DetailsFormComponent from './DetailsFormComponent'
 
 function Details() {
-    const [username, setUsername] = useState(null);
-    const [password, setPassword] = useState(null);
-    const [languageForMovie, setLanguageForMovie] = useState(null);
-    const [favouriteGenre, setFavouriteGenre] = useState(null);
-    const [galleryToShow, setGalleryToShow] = useState(null);
-    const [languageForHearing, setLanguageForHearing] = useState(null);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [languageForMovie, setLanguageForMovie] = useState("");
+    const [favouriteGenre, setFavouriteGenre] = useState("");
+    const [galleryToShow, setGalleryToShow] = useState([]);
+    const [languageForHearing, setLanguageForHearing] = useState("");
 
     useEffect(() => {
-        setUsername(localStorage.getItem('username'));
-        setPassword(localStorage.getItem('password'));
-        setLanguageForMovie(localStorage.getItem('languageForMovie'));
-        setFavouriteGenre(localStorage.getItem('favouriteGenre'));
-        setGalleryToShow(JSON.parse(localStorage.getItem('galleryToShow')));
-        setLanguageForHearing(localStorage.getItem('languageForHearing'));
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUserIndex = localStorage.getItem('currentUserIndex') || 0;
+        let currentUser = users[currentUserIndex];
+        if (currentUser) { // Check if currentUser is not undefined
+            setUsername(currentUser.username);
+            setPassword(currentUser.password);
+            setLanguageForMovie(currentUser.languageForMovie);
+            setFavouriteGenre(currentUser.favouriteGenre);
+            setGalleryToShow(currentUser.galleryToShow);
+            setLanguageForHearing(currentUser.languageForHearing);
+        }
     }, []);
 
     return (

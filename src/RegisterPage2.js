@@ -9,8 +9,12 @@ const RegisterPage2 = () => {
     const [favouriteGenre, setFavouriteGenre] = useState("");
 
     useEffect(() => {
-        localStorage.setItem('languageForMovie', languageForMovie);
-        localStorage.setItem('favouriteGenre', favouriteGenre);
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUserIndex = localStorage.getItem('currentUserIndex') || 0;
+        let newUser = {...users[currentUserIndex], languageForMovie, favouriteGenre};
+        users[currentUserIndex] = newUser;
+        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('currentUserIndex', currentUserIndex);
     }, [languageForMovie, favouriteGenre]);
 
     return (
