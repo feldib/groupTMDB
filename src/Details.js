@@ -10,6 +10,7 @@ function Details() {
     const [favouriteGenre, setFavouriteGenre] = useState("");
     const [galleryToShow, setGalleryToShow] = useState([]);
     const [languageForHearing, setLanguageForHearing] = useState("");
+    const [currentUserIndex, setCurrentUserIndex] = useState(null);
 
     useEffect(() => {
         const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -22,8 +23,15 @@ function Details() {
             setFavouriteGenre(currentUser.favouriteGenre);
             setGalleryToShow(currentUser.galleryToShow);
             setLanguageForHearing(currentUser.languageForHearing);
+            setCurrentUserIndex(currentUserIndex); // Set the current user index state
         }
     }, []);
+
+    const saveToLocalStorage = (key, value) => {
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        users[currentUserIndex][key] = value;
+        localStorage.setItem('users', JSON.stringify(users));
+    }
 
     return (
         <Row>
@@ -33,6 +41,9 @@ function Details() {
                     icon = {faUser}
                     placeholder = {username || "[Username]"}
                     type = "text"
+                    stateFunction = {setUsername}
+                    saveFunction = {saveToLocalStorage}
+                    stateKey = 'username'
                 />
                 
                 <DetailsFormComponent 
@@ -40,6 +51,9 @@ function Details() {
                     icon = {faKey}
                     placeholder = {password || "[****]"} 
                     type = "password"
+                    stateFunction = {setPassword}
+                    saveFunction = {saveToLocalStorage}
+                    stateKey = 'password'
                 />
 
                 <DetailsFormComponent 
@@ -47,6 +61,9 @@ function Details() {
                     icon = {faLanguage}
                     placeholder = {languageForMovie || "[Favourite language]"}
                     type = "text"
+                    stateFunction = {setLanguageForMovie}
+                    saveFunction = {saveToLocalStorage}
+                    stateKey = 'languageForMovie'
                 />
 
                 <DetailsFormComponent 
@@ -54,6 +71,9 @@ function Details() {
                     icon = {faQuestion}
                     placeholder = {favouriteGenre || "[Favourite genre]"}
                     type = "text"
+                    stateFunction = {setFavouriteGenre}
+                    saveFunction = {saveToLocalStorage}
+                    stateKey = 'favouriteGenre'
                 />
 
                 <Form.Label>Choose Galleries</Form.Label>
@@ -89,6 +109,9 @@ function Details() {
                     icon = {faHeadphonesSimple}
                     placeholder = {languageForHearing || "[Language]"} 
                     type = "text"
+                    stateFunction = {setLanguageForHearing}
+                    saveFunction = {saveToLocalStorage}
+                    stateKey = 'languageForHearing'
                 />
             </Form>
         </Row>
