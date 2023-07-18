@@ -16,8 +16,7 @@ function HistoryBox(props) {
                         <img
                             src={imageURL + movie.poster_path}
                             width="150px"
-                            height="150px"
-                            className="border border-black"
+                            height="220px"
                         />
                     </Col>
 
