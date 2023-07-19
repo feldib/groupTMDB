@@ -37,6 +37,7 @@ function ViewHistory() {
         }
     }, [currentFilter, movies])
 
+
     useEffect(() => {
         const fetchMovies = async () => {
             try {
