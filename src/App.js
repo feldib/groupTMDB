@@ -26,7 +26,20 @@ function App() {
   function handleHistory(url, currentDate) {
     data1.users.forEach(user => {
       if (user.loggedin) {
-        user.viewedMovies.push({url, currentDate })
+        let addedOnce = false
+        let i = 0
+        while(i<user.viewedMovieslength && !addedOnce){
+          if(
+              user.viewedMovies[i].url === url &&
+              user.viewedMovies[i].currentDate === currentDate
+            ){
+            addedOnce = true
+          }
+          i++
+        }
+        if(!addedOnce){
+          user.viewedMovies.push({url, currentDate })
+        }
       }
     })
     localStorage.setItem("data", JSON.stringify(data1))
