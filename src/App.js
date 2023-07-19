@@ -17,7 +17,10 @@ import data from './user2';
 
 function App() {
 
-  localStorage.setItem("data", JSON.stringify(data));
+  if(!localStorage.getItem("data")){
+    localStorage.setItem("data", JSON.stringify(data));
+  }
+  
   const data1 = JSON.parse(localStorage.getItem("data"));
 
   function handleHistory(url, currentDate) {
