@@ -31,6 +31,25 @@ const sortingData = {
     }
 }
 
+function getCurrentDate(movie, viewedMovies){
+    return viewedMovies.find(
+            movies => movies.url === `/${movie.id}`
+        ).currentDate
+}
+
+const extraSortingData = {
+    "Date of viewing (newest to oldest)": function(movies, viewedMovies){
+        return movies.sort(
+                (a,b)=> Date.parse(getCurrentDate(b, viewedMovies)) - Date.parse(getCurrentDate(a, viewedMovies))
+            )
+    },
+    "Date of viewing (oldest to newest)": function(movies, viewedMovies){
+        return movies.sort(
+                (a,b)=> Date.parse(getCurrentDate(a, viewedMovies)) - Date.parse(getCurrentDate(b, viewedMovies))
+            )
+    }
+}
+
 const sortingOptions = Array.from(Object.keys(sortingData))
 
-export {sortingOptions as default, sortingData}
+export {sortingOptions as default, sortingData, extraSortingData}
