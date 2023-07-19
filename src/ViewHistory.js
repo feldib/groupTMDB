@@ -5,7 +5,19 @@ import genres from './genres'
 import { sortingData, extraSortingData } from "./sortingOptions"
 import options from "./options";
 
+
 function ViewHistory() {
+    const data = JSON.parse(localStorage.getItem("data"))
+    const currentUser = data.users.find(
+            (user)=>{
+                if(user.loggedin===true){
+                    console.log(JSON.stringify(user))
+                }
+                return user.loggedin===true
+            }
+        )
+    console.log(currentUser)
+
 
     const [movies, setMovies] = useState([])
     const data = JSON.parse(localStorage.getItem("data"))
