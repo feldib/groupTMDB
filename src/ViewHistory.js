@@ -6,14 +6,18 @@ import { sortingData, extraSortingData } from "./sortingOptions"
 import options from "./options";
 
 function ViewHistory() {
+    const data = JSON.parse(localStorage.getItem("data"))
+    const currentUser = data.users.find(
+            (user)=>{
+                return user.loggedin===true
+            }
+        )
 
     const [movies, setMovies] = useState([])
-    const data = JSON.parse(localStorage.getItem("data"))
-    const [filteredMovies, setFilteredMovies] = useState([])
-
     const [viewedMovies, setViewedMovies] = React.useState(
-        ...data.users.map(user=>user.viewedMovies)
+        currentUser.viewedMovies
     )
+    const [filteredMovies, setFilteredMovies] = useState(viewedMovies)
 
     const [currentFilter, setCurrentFilter] = React.useState("")
     const [currentSorting, setCurrentSorting] = React.useState("")
@@ -31,7 +35,8 @@ function ViewHistory() {
                 })
             )
         }
-    }, [currentFilter])
+    }, [currentFilter, movies])
+
 
     useEffect(() => {
         const fetchMovies = async () => {
