@@ -9,7 +9,6 @@ function HistoryBox(props) {
     const imageURL = `https://image.tmdb.org/t/p/w500`
     let theCurrentDate = ''
     const data = JSON.parse(localStorage.getItem("data"));
-    const history = JSON.parse(localStorage.getItem("history"));
 
     data.users.forEach(user => {
         if (user.loggedin) {
