@@ -18,14 +18,11 @@ function ViewHistory() {
         )
     console.log(currentUser)
 
-
     const [movies, setMovies] = useState([])
-    const data = JSON.parse(localStorage.getItem("data"))
-    const [filteredMovies, setFilteredMovies] = useState([])
-
     const [viewedMovies, setViewedMovies] = React.useState(
-        ...data.users.map(user=>user.viewedMovies)[0]
+        currentUser.viewedMovies
     )
+    const [filteredMovies, setFilteredMovies] = useState(viewedMovies)
 
     const [currentFilter, setCurrentFilter] = React.useState("")
     const [currentSorting, setCurrentSorting] = React.useState("")
@@ -43,7 +40,8 @@ function ViewHistory() {
                 })
             )
         }
-    }, [currentFilter])
+    }, [currentFilter, movies])
+
 
     useEffect(() => {
         const fetchMovies = async () => {
