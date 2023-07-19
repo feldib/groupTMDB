@@ -3,8 +3,6 @@ import MovieBox from "./MovieBox1"
 import {sortingData} from "./sortingOptions"
 
 function MovieGalleryBig(props) {
-    const [orderedMovies, setOrderedMovies] = React.useState(props.movies)
-
     return (
         <div className='d-flex p-3 flex-wrap'>
             {props.sorting !== "" 
