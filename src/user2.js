@@ -3,7 +3,7 @@ const data = {
     {
       id: 1,
       username: "Bret",
-      password: "",
+      password: "1234",
       viewedMovies: [],
       languageForMovie: "",
       languageForHearing: "",
@@ -20,7 +20,7 @@ const data = {
         languageForHearing: "",
         favouriteGenre: "",
         galleryToShow: "",
-        logedin: false
+        loggedin: false
     },
     {
         id: 3,
@@ -31,7 +31,7 @@ const data = {
         languageForHearing: "",
         favouriteGenre: "",
         galleryToShow: "",
-        logedin: false
+        loggedin: false
 
     },
     {
@@ -43,7 +43,7 @@ const data = {
         languageForHearing: "",
         favouriteGenre: "",
         galleryToShow: "",
-        logedin: false
+        loggedin: false
 
       },
     {
@@ -55,7 +55,7 @@ const data = {
         languageForHearing: "",
         favouriteGenre: "",
         galleryToShow: "",
-        logedin: false
+        loggedin: false
 
     },
     {
@@ -67,7 +67,7 @@ const data = {
         languageForHearing: "",
         favouriteGenre: "",
         galleryToShow: "",
-        logedin: false
+        loggedin: false
 
     },
     {
@@ -79,7 +79,7 @@ const data = {
         languageForHearing: "",
         favouriteGenre: "",
         galleryToShow: "",
-        logedin: false
+        loggedin: false
 
     },
     {
@@ -91,7 +91,7 @@ const data = {
         languageForHearing: "",
         favouriteGenre: "",
         galleryToShow: "",
-        logedin: false
+        loggedin: false
 
     },
     {
@@ -103,7 +103,7 @@ const data = {
         languageForHearing: "",
         favouriteGenre: "",
         galleryToShow: "",
-        logedin: false
+        loggedin: false
 
     },
     {
@@ -115,7 +115,7 @@ const data = {
         languageForHearing: "",
         favouriteGenre: "",
         galleryToShow: "",
-        logedin: false
+        loggedin: false
     }
   ]}
 
