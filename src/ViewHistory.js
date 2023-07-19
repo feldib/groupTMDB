@@ -2,15 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Row, Dropdown, Col, Button } from 'react-bootstrap'
 import HistoryBox from './HistoryBox'
 
+function ViewHistory() {
 
-function ViewHistory(props) {
     const [movies, setMovies] = useState([]);
-    const urlArray = props.urlArray;
     const arrOfApi = []
+    const data = JSON.parse(localStorage.getItem("data"));
 
-    urlArray.forEach(url => {
-        if (!arrOfApi.includes(`https://api.themoviedb.org/3/movie${url}?api_key=8d97210e6edd66eb9e967278325836d0`)) {
-            arrOfApi.push(`https://api.themoviedb.org/3/movie${url}?api_key=8d97210e6edd66eb9e967278325836d0`)
+
+    data.users.forEach(user => {
+        if (user.viewedMovies.length > 0) {
+            user.viewedMovies.forEach(movie => {
+                if (!arrOfApi.includes(`https://api.themoviedb.org/3/movie${movie.url}?api_key=8d97210e6edd66eb9e967278325836d0`)) {
+                    arrOfApi.push(`https://api.themoviedb.org/3/movie${movie.url}?api_key=8d97210e6edd66eb9e967278325836d0`)
+                }
+            })
         }
     })
 
@@ -71,9 +76,6 @@ function ViewHistory(props) {
             </Row>
 
             {movies.length === 0 ? "no movies viewed" : movies.map((movie) => <HistoryBox theMovie={movie} />)}
-            {console.log(`url array = ${urlArray}`)}
-            {console.log(`api array = ${arrOfApi}`)}
-            {console.log(`movies = ${movies}`)}
 
         </Row>
     )

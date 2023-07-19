@@ -7,8 +7,22 @@ function HistoryBox(props) {
 
     const movie = props.theMovie
     const imageURL = `https://image.tmdb.org/t/p/w500`
+    let theCurrentDate = ''
+    const data = JSON.parse(localStorage.getItem("data"));
+    const history = JSON.parse(localStorage.getItem("history"));
 
+    data.users.forEach(user => {
+        if (user.loggedin) {
+            user.viewedMovies.forEach(movies => {
+                if (movies.url === `/${movie.id}`) {
+                    theCurrentDate = movies.currentDate
+                }
+            })
+        }
+    })
+    
     return (
+    
         <Row className='mt-5'>
             <Col>
                 <Row classname="movieInfoLine">
@@ -25,7 +39,7 @@ function HistoryBox(props) {
                             {movie.overview}
                         </p>
                         <p><strong>
-                            Viewed on 23.01.2021
+                          First visited on: {theCurrentDate}
                         </strong></p>
                     </Col>
                     <Col>
