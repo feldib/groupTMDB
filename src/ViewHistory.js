@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Row, Dropdown, Col, Button } from 'react-bootstrap'
 import HistoryBox from './HistoryBox'
+import genres from './genres'
+import { sortingData, extraSortingData } from "./sortingOptions"
+import options from "./options";
 
 function ViewHistory() {
 
     const [movies, setMovies] = useState([]);
-    const arrOfApi = []
-    const data = JSON.parse(localStorage.getItem("data"));
+    const data = JSON.parse(localStorage.getItem("data"))
 
+    const [viewedMovies, setViewedMovies] = React.useState(
+        ...data.users.map(user=>user.viewedMovies)
+    )
 
-    data.users.forEach(user => {
-        if (user.viewedMovies.length > 0) {
-            user.viewedMovies.forEach(movie => {
-                if (!arrOfApi.includes(`https://api.themoviedb.org/3/movie${movie.url}?api_key=8d97210e6edd66eb9e967278325836d0`)) {
-                    arrOfApi.push(`https://api.themoviedb.org/3/movie${movie.url}?api_key=8d97210e6edd66eb9e967278325836d0`)
-                }
-            })
-        }
-    })
+    const [currentFilter, setCurrentFilter] = React.useState("")
+    const [currentSorting, setCurrentSorting] = React.useState("")
 
     useEffect(() => {
         const fetchMovies = async () => {
             try {
-                const responses = await Promise.all(arrOfApi.map(api => fetch(api).then(response => response.json())));
+                const responses = await Promise.all(
+                    viewedMovies.map(viewedMovie => fetch(
+                        `https://api.themoviedb.org/3/movie${viewedMovie.url}`, options
+                    ).then(response => response.json()))
+                );
                 setMovies(responses);
             } catch (error) {
                 console.error(error);
@@ -40,27 +42,48 @@ function ViewHistory() {
             </Row>
             <Row className='mt-5'>
                 <Col>
-                    <Dropdown>
+                    <Dropdown
+                        onSelect={(eventKey)=>{
+                            setCurrentFilter(eventKey)
+                        }}
+                    >
                         <Dropdown.Toggle>Filter</Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="">Choose Genre...</Dropdown.Item>
-                            <Dropdown.Item href="">Choose Genre...</Dropdown.Item>
-                            <Dropdown.Item href="">Choose Genre...</Dropdown.Item>
-                            <Dropdown.Item href="">Choose Genre...</Dropdown.Item>
-                            <Dropdown.Item href="">Choose Genre...</Dropdown.Item>
-                            <Dropdown.Item href="">Choose Genre...</Dropdown.Item>
-                            <Dropdown.Item href="">Choose Genre...</Dropdown.Item>
-                            <Dropdown.Item href="">Choose Genre...</Dropdown.Item>
+                            {genres.map((val)=>{
+                                return (
+                                    <Dropdown.Item 
+                                        href=""
+                                        eventKey={val}
+                                    >{val}</Dropdown.Item>
+                                )
+                            })}  
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
 
                 <Col>
-                    <Dropdown>
+                    <Dropdown
+                        onSelect={(eventKey)=>{
+                            setCurrentSorting(eventKey)
+                        }}
+                    >
                         <Dropdown.Toggle>Sort:</Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="">Rating</Dropdown.Item>
-                            <Dropdown.Item href="">Viewed date</Dropdown.Item>
+                            {
+                                [
+                                    "Rating (lowest to highest)",
+                                    "Rating (higher to lowest)",
+                                    "Date of viewing (newest to oldest)",
+                                    "Date of viewing (oldest to newest)"
+                                ].map((val)=>{
+                                    return (
+                                        <Dropdown.Item 
+                                            href=""
+                                            eventKey={val}
+                                        >{val}</Dropdown.Item>
+                                    )
+                                })
+                            }  
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
@@ -75,7 +98,30 @@ function ViewHistory() {
 
             </Row>
 
-            {movies.length === 0 ? "no movies viewed" : movies.map((movie) => <HistoryBox theMovie={movie} />)}
+            {currentSorting !== "" 
+                ?
+                    Array.from(
+                        Object.keys(
+                                sortingData
+                            )
+                        )
+                    .includes(currentSorting) 
+                        ?
+                            sortingData[currentSorting](movies)
+                                .map(
+                                    (movie) => <HistoryBox theMovie={movie}/>
+                                )
+                        :
+                            extraSortingData[currentSorting](movies, viewedMovies)
+                            .map(
+                                (movie) => <HistoryBox theMovie={movie}/>
+                            )
+                :
+                    movies
+                        .map(
+                            (movie) => <HistoryBox theMovie={movie}/>
+                        )
+            }
 
         </Row>
     )
