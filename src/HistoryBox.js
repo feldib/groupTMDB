@@ -15,7 +15,7 @@ function HistoryBox(props) {
         if (user.loggedin) {
             user.viewedMovies.forEach(movies => {
                 if (movies.url === `/${movie.id}`) {
-                    theCurrentDate = movies.currentDate
+                    theCurrentDate = new Date(movies.currentDate).toLocaleDateString()
                 }
             })
         }

@@ -32,9 +32,10 @@ const sortingData = {
 }
 
 function getCurrentDate(movie, viewedMovies){
-    return viewedMovies.find(
-            movies => movies.url === `/${movie.id}`
+    const result = viewedMovies.find(
+            viewedMovie => viewedMovie.url === `/${movie.id}`
         ).currentDate
+    return result
 }
 
 const extraSortingData = {
