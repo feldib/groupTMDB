@@ -68,7 +68,7 @@ function ViewHistory() {
 
             <Row className='mt-5'>
                 <Col>
-                    <Button variant="danger">
+                    <Button variant="danger" >
                         CLEAR HISTORY
                     </Button>
                 </Col>

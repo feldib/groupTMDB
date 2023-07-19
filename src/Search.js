@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Row, Col, Form, InputGroup, Dropdown } from 'react-bootstrap'
+import { Button, Row, Col, Form, InputGroup, Dropdown, Container } from 'react-bootstrap'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import MovieGalleryBig from './MovieGalleryBig';
@@ -18,132 +18,135 @@ function Search() {
     const [currentSorting, setCurrentSorting] = React.useState("")
 
     React.useEffect(() => {
-        if(!currentQueryOrFilter){
+        if (!currentQueryOrFilter) {
             fetching(upcomingUrl, setMovies)
         }
     }, [currentQueryOrFilter])
 
     const searchElement = React.useRef()
 
-    const processQueryOrFilter = async(what, value)=>{
+    const processQueryOrFilter = async (what, value) => {
         setCurrentQueryOrFilter(value)
-        if(what === "query"){
+        if (what === "query") {
             await SearchFetching(setMovies, value)
-        }else{
+        } else {
             await FilterFetching(setMovies, value)
         }
     }
 
     return (
-        <Row className="login-page">
-            <Row>
-                <Col>
-                    <h1 className='text-center'>Search!</h1>
-                </Col>
-            </Row>
+        <Container>
+            <Row className="login-page">
+                <Row>
+                    <Col>
+                        <h1 className='text-center'>Search!</h1>
+                    </Col>
+                </Row>
 
-            <Row className='mt-3 mx-5'>
-                <Col>
-                    <InputGroup>
-                        <InputGroup.Text>
-                            <FontAwesomeIcon icon={faFilm} />
-                        </InputGroup.Text>
-                        
-                        <Form.Control 
-                            type="text" 
-                            placeholder="Search for a movie"
-                            ref={searchElement}
-                        />
-                        <Button
-                            onClick={()=>{
-                                processQueryOrFilter("query", searchElement.current.value)
-                                setCurrentQueryOrFilter(searchElement.current.value)
+                <Row className='mt-3'>
+                    <Col>
+                        <InputGroup>
+                            <InputGroup.Text>
+                                <FontAwesomeIcon icon={faFilm} />
+                            </InputGroup.Text>
+
+                            <Form.Control
+                                type="text"
+                                placeholder="Search for a movie"
+                                ref={searchElement}
+                            />
+                            <Button
+                                onClick={() => {
+                                    processQueryOrFilter("query", searchElement.current.value)
+                                    setCurrentQueryOrFilter(searchElement.current.value)
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            </Button>
+                        </InputGroup>
+                    </Col>
+                </Row>
+
+                <Row className='text-center mt-3'>
+                    <Col>
+                        {currentQueryOrFilter &&
+                            <p>
+                                <span
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => {
+                                        setCurrentQueryOrFilter("")
+                                    }}
+                                >❌</span>
+                                {currentQueryOrFilter}
+                            </p>
+                        }
+                    </Col>
+                    <Col>
+                        {currentSorting &&
+                            <p>
+                                <span
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => {
+                                        setCurrentSorting("")
+                                    }}
+                                >❌</span>
+                                {currentSorting}
+                            </p>
+                        }
+                    </Col>
+
+                    <Col>
+                        <Dropdown
+                            onSelect={(eventKey) => {
+                                processQueryOrFilter("filter", eventKey)
                             }}
                         >
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </Button> 
-                    </InputGroup>  
-                </Col>
-            </Row>
-                
-            <Row className='text-center mt-3'>
-                <Col>
-                    {currentQueryOrFilter &&
-                        <p>
-                            <span 
-                                style={{cursor: "pointer"}}
-                                onClick={()=>{
-                                    setCurrentQueryOrFilter("")
-                                }}
-                            >❌</span>
-                            {currentQueryOrFilter}
-                        </p>
-                    }
-                </Col>
-                <Col>
-                    {currentSorting &&
-                        <p>
-                            <span 
-                                style={{cursor: "pointer"}}
-                                onClick={()=>{
-                                    setCurrentSorting("")
-                                }}
-                            >❌</span>
-                            {currentSorting}
-                        </p>
-                    }
-                </Col>
-                    
-                <Col>
-                    <Dropdown
-                        onSelect={(eventKey)=>{
-                            processQueryOrFilter("filter", eventKey)
-                        }}
-                    >
-                        <Dropdown.Toggle>Filter</Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {genres.map((val)=>{
-                                return (
-                                    <Dropdown.Item 
-                                        href=""
-                                        eventKey={val}
-                                    >{val}</Dropdown.Item>
-                                )
-                            })}  
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Col>
-                    
-                <Col>
-                    <Dropdown
-                        onSelect={(eventKey)=>{
-                            setCurrentSorting(eventKey)
-                        }}
-                    >
-                        <Dropdown.Toggle>Sort:</Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {sortingOptions.map((val)=>{
-                                return (
-                                    <Dropdown.Item 
-                                        href=""
-                                        eventKey={val}
-                                    >{val}</Dropdown.Item>
-                                )
-                            })}  
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Col>
-            </Row>
+                            <Dropdown.Toggle>Filter</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {genres.map((val) => {
+                                    return (
+                                        <Dropdown.Item
+                                            href=""
+                                            eventKey={val}
+                                        >{val}</Dropdown.Item>
+                                    )
+                                })}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
 
-            <Row>
-                <Col>
-                    {movies.length === 0 
-                        ? <Loader/> 
-                        : <MovieGalleryBig movies={movies} sorting={currentSorting}/>
-                    }
-                </Col>
+                    <Col>
+                        <Dropdown
+                            onSelect={(eventKey) => {
+                                setCurrentSorting(eventKey)
+                            }}
+                        >
+                            <Dropdown.Toggle>Sort:</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {sortingOptions.map((val) => {
+                                    return (
+                                        <Dropdown.Item
+                                            href=""
+                                            eventKey={val}
+                                        >{val}</Dropdown.Item>
+                                    )
+                                })}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
+                </Row>
+                <Container className='ml-5'>
+                    <Row className='text-center'>
+                        <Col>
+                            {movies.length === 0
+                                ? <Loader />
+                                : <MovieGalleryBig movies={movies} sorting={currentSorting} />
+                            }
+                        </Col>
+                    </Row>
+                </Container>
             </Row>
-        </Row>
+        </Container>
     )
 }
 
