@@ -9,7 +9,7 @@ const data = {
       languageForHearing: "",
       favouriteGenre: "",
       galleryToShow: "",
-      loggedin: true
+      loggedin: false
     },
     {
         id: 2,

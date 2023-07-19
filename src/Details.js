@@ -14,7 +14,8 @@ function Details() {
 
     useEffect(() => {
         const users = JSON.parse(localStorage.getItem('users')) || [];
-        const currentUserIndex = localStorage.getItem('currentUserIndex') || 0;
+        const currentUserIndex = parseInt(localStorage.getItem('currentUserIndex')) || 0;
+        setCurrentUserIndex(currentUserIndex); // Set the current user index state
         let currentUser = users[currentUserIndex];
         if (currentUser) { // Check if currentUser is not undefined
             setUsername(currentUser.username);
@@ -23,7 +24,6 @@ function Details() {
             setFavouriteGenre(currentUser.favouriteGenre);
             setGalleryToShow(currentUser.galleryToShow);
             setLanguageForHearing(currentUser.languageForHearing);
-            setCurrentUserIndex(currentUserIndex); // Set the current user index state
         }
     }, []);
 
@@ -31,7 +31,7 @@ function Details() {
         let users = JSON.parse(localStorage.getItem('users')) || [];
         users[currentUserIndex][key] = value;
         localStorage.setItem('users', JSON.stringify(users));
-    }
+    };
 
     return (
         <Row>

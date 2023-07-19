@@ -6,16 +6,36 @@ import { sortingData, extraSortingData } from "./sortingOptions"
 import options from "./options";
 
 function ViewHistory() {
-
-    const [movies, setMovies] = useState([]);
     const data = JSON.parse(localStorage.getItem("data"))
+    const currentUser = data.users.find(
+            (user)=>{
+                return user.loggedin===true
+            }
+        )
 
+    const [movies, setMovies] = useState([])
     const [viewedMovies, setViewedMovies] = React.useState(
-        ...data.users.map(user=>user.viewedMovies)
+        currentUser.viewedMovies
     )
+    const [filteredMovies, setFilteredMovies] = useState(viewedMovies)
 
     const [currentFilter, setCurrentFilter] = React.useState("")
     const [currentSorting, setCurrentSorting] = React.useState("")
+
+    useEffect(()=>{
+        if(!currentFilter){
+            setFilteredMovies(movies)
+        }else{
+            setFilteredMovies(
+                movies.filter((movie)=>{
+                    const includes = movie.genres.map(
+                            (obj)=>obj.name
+                        ).includes(currentFilter)
+                    return includes
+                })
+            )
+        }
+    }, [currentFilter, movies])
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -98,6 +118,35 @@ function ViewHistory() {
 
             </Row>
 
+            <Row className='text-center mt-3'>
+                <Col>
+                    {currentFilter &&
+                        <p>
+                            <span 
+                                style={{cursor: "pointer"}}
+                                onClick={()=>{
+                                    setCurrentFilter("")
+                                }}
+                            >❌</span>
+                            {currentFilter}
+                        </p>
+                    }
+                </Col>
+                <Col>
+                    {currentSorting &&
+                        <p>
+                            <span 
+                                style={{cursor: "pointer"}}
+                                onClick={()=>{
+                                    setCurrentSorting("")
+                                }}
+                            >❌</span>
+                            {currentSorting}
+                        </p>
+                    }
+                </Col>
+            </Row>
+
             {currentSorting !== "" 
                 ?
                     Array.from(
@@ -107,17 +156,17 @@ function ViewHistory() {
                         )
                     .includes(currentSorting) 
                         ?
-                            sortingData[currentSorting](movies)
+                            sortingData[currentSorting](filteredMovies)
                                 .map(
                                     (movie) => <HistoryBox theMovie={movie}/>
                                 )
                         :
-                            extraSortingData[currentSorting](movies, viewedMovies)
+                            extraSortingData[currentSorting](filteredMovies, viewedMovies)
                             .map(
                                 (movie) => <HistoryBox theMovie={movie}/>
                             )
                 :
-                    movies
+                    filteredMovies
                         .map(
                             (movie) => <HistoryBox theMovie={movie}/>
                         )
