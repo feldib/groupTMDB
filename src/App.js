@@ -13,14 +13,21 @@ import RegisterPage1 from './RegisterPage1';
 import RegisterPage2 from './RegisterPage2';
 import RegisterPage3 from './RegisterPage3';
 import MoviePage from './MoviePage';
+import data from './user2';
 
 function App() {
 
-  const [visitHistory, setVisitHistory] = useState([])
+  localStorage.setItem("data", JSON.stringify(data));
+  const data1 = JSON.parse(localStorage.getItem("data"));
 
-  function handleHistory(url) {
-    setVisitHistory([...visitHistory, url])
-    console.log(visitHistory)
+  function handleHistory(url, currentDate) {
+    data1.users.forEach(user => {
+      if (user.loggedin) {
+        user.viewedMovies.push({url, currentDate })
+      }
+    })
+    localStorage.setItem("data", JSON.stringify(data1))
+    console.log(JSON.parse(localStorage.data))
   }
 
   return (
@@ -51,7 +58,7 @@ function App() {
             }
             />
             <Route path="ViewHistory" element={
-              <ViewHistory urlArray={visitHistory}/>
+              <ViewHistory/>
             }
             />
           </Route>

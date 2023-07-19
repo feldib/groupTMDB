@@ -20,7 +20,8 @@ function MoviePage(props) {
     useEffect(() => {
         fetching2(movieURL, setMovie)
         const currentUrl = window.location.pathname
-        props.handleClick(currentUrl)
+        const currentDate = new Date().toLocaleDateString();
+        props.handleClick(currentUrl, currentDate)
     }, []);
 
 
